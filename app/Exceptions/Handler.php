@@ -2,18 +2,25 @@
 
 namespace App\Exceptions;
 
+use App\Traits\RestExceptionHandlerTrait;
+use App\Traits\RestTrait;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
+    use RestTrait, RestExceptionHandlerTrait;
+
     /**
      * A list of the exception types that are not reported.
      *
      * @var array
      */
     protected $dontReport = [
-        //
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -46,6 +53,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isApiCall($request)) {
+            return $this->getJsonResponseForException($exception);
+        }
+
         return parent::render($request, $exception);
     }
 }
