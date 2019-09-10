@@ -29,4 +29,8 @@ return [
         'error_code' => 622,
         'message' => 'Fail validation!',
     ],
+    'elastic_index_exists' => [
+        'error_code' => 1006,
+        'message' => 'Index already exists.'
+    ]
 ];

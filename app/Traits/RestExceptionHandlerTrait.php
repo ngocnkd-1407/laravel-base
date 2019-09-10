@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Exceptions\LaravelBaseApiException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -20,7 +21,7 @@ trait RestExceptionHandlerTrait
      */
     protected function getJsonResponseForException(Exception $e)
     {
-        if (config('APP_ENV') == 'local') {
+        if (config('app.env') == 'local') {
             Log::error($e->getMessage());
         }
 
