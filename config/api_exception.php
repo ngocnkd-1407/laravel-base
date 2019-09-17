@@ -29,4 +29,12 @@ return [
         'error_code' => 622,
         'message' => 'Fail validation!',
     ],
+    'elastic_index_exists' => [
+        'error_code' => 1006,
+        'message' => 'Index already exists.',
+    ],
+    'elastic_document_not_exists' => [
+        'error_code' => 1007,
+        'message' => 'Document does not exist.',
+    ],
 ];
